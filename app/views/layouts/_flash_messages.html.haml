@@ -1,0 +1,5 @@
+- unless flash.empty?
+  .flash-messages
+    - flash.each do |name, message|
+      %div{ class: "alert alert--#{name}" }= message
+

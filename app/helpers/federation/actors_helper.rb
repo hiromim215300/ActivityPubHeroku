@@ -1,0 +1,2 @@
+module Federation::ActorsHelper
+end

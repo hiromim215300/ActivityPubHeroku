@@ -1,0 +1,21 @@
+%h1 Listing actors
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th Username
+      %th Federation address
+      %th Local?
+      %th
+
+  %tbody
+    - @actors.each do |actor|
+      %tr
+        %td= actor.name
+        %td= actor.username
+        %td= actor.at_address
+        %td= actor.local?
+        %td
+          = link_to 'Show', actor
+

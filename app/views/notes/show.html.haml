@@ -1,0 +1,12 @@
+%p
+  %b Content:
+  = @note.content
+%p
+  %b Actor:
+  = @note.actor.name
+
+- if policy(@note).edit?
+  = link_to 'Edit', edit_note_path(@note)
+\|
+= link_to 'Back', notes_path
+

@@ -1,0 +1,24 @@
+%h1 Listing notes
+
+%table
+  %thead
+    %tr
+      %th Content
+      %th Actor
+      %th
+
+  %tbody
+    - @notes.each do |note|
+      %tr
+        %td= note.content
+        %td= note.actor.name
+        %td
+          = link_to 'Show', note
+          - if policy(note).edit?
+            = link_to 'Edit', edit_note_path(note)
+          - if policy(note).destroy?
+            = link_to 'Destroy', note, method: :delete, data: { confirm: 'Are you sure?' }
+
+- if policy(Note).new?
+  = link_to 'New Note', new_note_path
+

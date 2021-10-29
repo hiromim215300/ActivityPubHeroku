@@ -1,0 +1,7 @@
+= form_tag lookup_actors_path, method: :get do
+  .field
+    = label_tag :account
+    = text_field_tag :account, nil, placeholder: 'user@domain.tld or username', required: true
+  .actions
+    = submit_tag 'Search'
+

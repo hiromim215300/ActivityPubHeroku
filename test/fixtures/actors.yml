@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  federated_url: MyString
+  server: MyString
+  inbox_url: MyString
+  outbox_url: MyString
+  followers_url: MyString
+  followings_url: MyString
+  user_id: 
+
+two:
+  name: MyString
+  federated_url: MyString
+  server: MyString
+  inbox_url: MyString
+  outbox_url: MyString
+  followers_url: MyString
+  followings_url: MyString
+  user_id: 

@@ -1,0 +1,12 @@
+- if policy(@user).edit?
+  = link_to 'Edit', edit_user_path(@user)
+= link_to 'Back', users_path
+
+%h2 @#{@user.username}
+
+%p
+  %b Name
+  = @user.name
+
+= link_to 'Actor', actor_url(@user.actor)
+

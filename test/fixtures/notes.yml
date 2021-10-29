@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  content: MyText
+  actor_id: 
+  federated_url: MyString
+
+two:
+  content: MyText
+  actor_id: 
+  federated_url: MyString

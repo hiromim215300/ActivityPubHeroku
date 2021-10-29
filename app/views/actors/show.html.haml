@@ -1,0 +1,34 @@
+%h2= @actor.name
+
+%p
+  %b Federated url:
+  = @actor.federated_url
+%p
+  %b Inbox URL:
+  = @actor.inbox_url
+%p
+  %b Outbox URL:
+  = @actor.outbox_url
+%p
+  %b Federation address:
+  = @actor.at_address
+%p
+  %b Home page:
+  - if @actor.local?
+    = link_to @actor.user.name, @actor.user
+  - else
+    (No homepage)
+
+%hr
+
+= link_to 'Back', actors_path
+
+-# FIXME: Fetch distant content somehow
+%h2 10 last activities
+- if @actor.local?
+  = link_to 'All', actor_activities_path(@actor)
+- elsif @actor.profile_url
+  = link_to 'Visit profile', @actor.profile_url
+- @actor.activities.last(10).each do |activity|
+  = render 'activities/activity', activity: activity
+
