@@ -4,9 +4,15 @@ module Fediverse
   class Inbox
     class << self
       def dispatch_request(payload)
+        puts("dispatch_request始まるよだが何かがおかしい")
+        puts("ここでのpayload_typeは#{payload['type']}")
         case payload['type']
-        when 'Create'
+#          puts("ここでのpayloadは#{payload}")
+        when 'Note'
+          puts ("Begin Create 1")
           handle_create_request payload
+         # actor = Actor.find_or_create_by_object activity['attributedTo']
+         # Activity.create! entity_type: "Note", action: "Create"
         when 'Accept'
           handle_accept_request payload
         when 'Undo'
@@ -14,19 +20,28 @@ module Fediverse
         else
           # FIXME: Fails silently
           # raise NotImplementedError
-          Rails.logger.debug "Unhandled activity type: #{payload['type']}"
+          puts ("Begin Create 2")
+          handle_create_request payload
+         # actor = Actor.find_or_create_by_object activity['attributedTo']
+         # Activity.create! entity_type: "Note", action: "Create"
+#          Rails.logger.debug "Unhandled activity type: #{payload['type']}"
         end
+      puts("ここはどうかしら")
       end
 
       private
 
       def handle_create_request(payload)
-        activity = Request.get(payload['object'])
-        case activity['type']
+#        activity = Request.get(payload['object'])
+#       activity = Request.get(payload['type'])
+       puts("handle create request payload 始めます#{payload['type']}")
+        case payload['type']
         when 'Follow'
-          handle_create_follow_request activity
+          handle_create_follow_request payload
         when 'Note'
-          handle_create_note activity
+         puts("今ここ") 
+         handle_create_note payload
+#          puts("Note")
         end
       end
 
@@ -37,9 +52,11 @@ module Fediverse
         Following.create! actor: actor, target_actor: target_actor, federated_url: activity['id']
       end
 
-      def handle_create_note(activity)
-        actor = Actor.find_or_create_by_object activity['attributedTo']
-        Note.create! actor: actor, content: activity['content'], federated_url: activity['id']
+      def handle_create_note(payload)
+        puts("handle_create_note")
+        actor = Actor.find_or_create_by_object payload['attributedTo']
+        puts("handle_create_noteでのactor = #{actor}")
+        Note.create! actor: actor, content: payload['content'], federated_url: payload['id']
       end
 
       def handle_accept_request(payload)

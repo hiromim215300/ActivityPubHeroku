@@ -6,6 +6,7 @@ module Federation
 
     private
     def set_federation_actor
+      puts("もしかしてここ？")
       @actor = Actor.find(params[:id])
       authorize @actor
     end

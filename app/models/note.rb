@@ -9,7 +9,10 @@ class Note < ApplicationRecord
   after_create :create_activity
 
   def federated_url
-    attributes['federated_url'].presence || federation_actor_note_url(actor_id: actor_id, id: id)
+   # attributes['federated_url'].presence || federation_actor_note_url(actor_id: actor_id, id: id)
+   first = Utils::Host.localhost
+   second = self.actor_id
+   self.federated_url = "https://#{first}:3000/actors/#{second}"
   end
 
   private

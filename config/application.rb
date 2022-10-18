@@ -10,6 +10,7 @@ module ActivityPub
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
+#    config.middleware.insert_before ActionDispatch::ParamsParser, Committee::Middleware::RequestValidation, schema: JSON.parse(File.read(schema_file))
 
    # config.site = config_for(:site)
     # Settings in config/environments/* take precedence over those specified here.

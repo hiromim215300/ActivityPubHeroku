@@ -18,7 +18,8 @@ class Activity < ApplicationRecord
     actors = []
     case action
     when 'Create'
-      actors.push(*actor.followers) if entity_type == 'Note'
+      puts("actors.push")
+     # actors.push('http://192.168.2.100:3000/notes/3.json') if entity_type == 'Note'
     end
     actors
   end

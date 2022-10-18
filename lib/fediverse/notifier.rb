@@ -12,6 +12,8 @@ module Fediverse
           format:   :json
         )
         actors.each do |actor|
+	  puts("notifier.rb")
+ 	  actor.inbox_url = 'http://192.168.2.100:3000/federation/actors/1/inbox'
           Rails.logger.debug "Sending activity ##{activity.id} to #{actor.inbox_url}"
           Faraday.post actor.inbox_url, message, 'Content-Type' => 'application/json', 'Accept' => 'application/json'
         end
