@@ -1,4 +1,5 @@
 require 'fediverse/notifier'
+require 'net/https'
 
 class NotifyInboxJob < ApplicationJob
   queue_as :default
@@ -8,7 +9,8 @@ class NotifyInboxJob < ApplicationJob
     puts("perform(activity) start!!")
     activity.reload
     Fediverse::Notifier.post_to_inboxes(activity)
-    uri = URI.parse("http://192.168.2.103:3000/federation/actors/1/inbox")
+#    uri = URI.parse("http://192.168.2.103:3000/federation/actors/1/inbox")
+    uri = URI.parse("http://43.206.44.205:3000/federation/actors/1/inbox")
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = false
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -22,6 +24,7 @@ class NotifyInboxJob < ApplicationJob
     )
     puts(data)
 #    data2 = 
+    Faraday.post("http://43.206.44.205:3000/federation/actors/1/inbox", data)
 #    Faraday.post "https://192.168.2.102:3000/federation/actors/1/inbox", data, 'Content-Type' => 'application/json', 'Accept' => 'application/json'
 #    apipost(data)
 #    req.set_form_data(data)

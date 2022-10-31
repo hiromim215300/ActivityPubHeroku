@@ -32,10 +32,10 @@ class Actor < ApplicationRecord
 
   def federated_url
 #    puts("確認用。federated_url")
-    url = local? ? federation_actor_url(self) : attributes['federated_url'].presence
-#    first = Utils::Host.localhost
- #   second = self.user_id
-  #  self.federated_url = "http://#{first}:3000/actors/#{second}"
+#    url = local? ? federation_actor_url(self) : attributes['federated_url'].presence
+    first = Utils::Host.localhost
+    second = self.user_id
+    self.federated_url = "http://#{first}:3000/actors/#{second}"
   end
 
   def c_username
@@ -57,14 +57,14 @@ class Actor < ApplicationRecord
     #inbox_url = local? ? federation_actor_inbox_url(self) : attributes['inbox_url']
     first = Utils::Host.localhost
     second = self.user_id
-    self.inbox_url = "http://#{first}:3000/actors/#{second}/inbox"
+    self.inbox_url = "http://#{first}:3000/federation/actors/#{second}/inbox"
   end
 
   def c_outbox_url
     #local? ? federation_actor_outbox_url(self) : attributes['inbox_url']
     first = Utils::Host.localhost
     second = self.user_id
-    self.outbox_url = "http://#{first}:3000/actors/#{second}/outbox"
+    self.outbox_url = "http://#{first}:3000/federation/actors/#{second}/outbox"
   end
 
   def at_address
@@ -97,7 +97,7 @@ class Actor < ApplicationRecord
 
       puts("actor=#{actor}")
       puts("actor.federated_url=#{actor.federated_url}")
-      actor.federated_url = 'http://192.168.2.104:3000/actors/1'
+      actor.federated_url = 'http://192.168.2.100:3000/actors/1'
       puts("actor.federated_url=#{actor.federated_url}")
       puts("確認用, actorの中身:federated_url=#{actor.federated_url},name=#{actor.name},server=#{actor.server},inbox_url=#{actor.inbox_url},outbox_url=#{actor.outbox_url}")
       actor
